@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+body {
+    max-width: 100%;
+    background: radial-gradient(red, 3px, transparent 4px), radial-gradient(black 3px, transparent 4px), linear-gradient(#fff 4px, transparent 0), linear-gradient(45deg, transparent 74px, transparent 75px, #a4a4a4 75px, #a4a4a4 76px, transparent 77px, transparent 109px), linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px), #fff;
+    background-size: 109px 109px, 109px 109px, 100% 6px, 109px 109px, 109px 109px;
+    background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+}
+
+.myvideo {}
+
+header {
+    background-color: rgb(107, 6, 6);
+    color: white;
+    padding: 15px 0px;
+    margin-bottom: 50px;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+video {
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    -webkit-box-shadow: 7px 5px 4px 1px rgba(0, 0, 0, 0.26);
+    box-shadow: 7px 5px 4px 1px rgba(0, 0, 0, 0.26);
+}
+
+header h1 {
+    text-align: center;
+}
+
+.fotos {
+    width: 80%;
+    margin: auto;
+    display: block;
+}
+
+img {
+    width: 100%;
+    margin-bottom: 8px;
+    -webkit-box-shadow: 7px 5px 4px 1px rgba(0, 0, 0, 0.26);
+    box-shadow: 7px 5px 4px 1px rgba(0, 0, 0, 0.26);
+}
+
+.text-info {
+    width: 80%;
+    margin: auto;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.text-info-foto {
+    margin: auto;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+p {
+    padding: 15px;
+    font-size: 14px;
+}
