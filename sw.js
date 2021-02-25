@@ -48,11 +48,9 @@ self.addEventListener('fetch', (event) => {
         .then(async(response) => {
             const cache = await caches.open(cacheStorage);
             cache.put(event.request.url, response.clone());
-            console.log('Service Worker nimmt die Daten aus dem Netz', event.request.url);
             return response.clone();
         })
         .catch(async() => {
-            console.log('Service Worker nimmt die Daten aus dem Cache', event.request.url)
             const response = await caches.match(event.request);
             return response;
         })
