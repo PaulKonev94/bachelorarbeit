@@ -3,15 +3,11 @@ navigator.storage.estimate().then(
     ({ usage, quota }) => console.log(`Wird ${usage} Byte aus ${quota} Byte verwendet`),
     error => console.warn(`error estimating quota: ${error.name}: ${error.message}`)
 );
+// Persistenten Speicher anfordern.
+if (navigator.storage && navigator.storage.persist) {
+    navigator.storage.persist()
+}
 
-// Quota anfordern.
-if (navigator.storage && navigator.storage.persist)
-    navigator.storage.persist().then(function(persistent) {
-        if (persistent)
-            console.log("Der Speicher wird nicht gelöscht, bei bedarf des Browsers gelöscht");
-        else
-            console.log("Die Speicherung kann unter Speicherdruck gelöscht werden.");
-    });
 
 // Auskomentieren wenn man die Quota anfordern möchte.
 /* var requestedBytes = 1024 * 1024 * 280;
@@ -74,9 +70,6 @@ function display(videoBlob) {
     const videoSrc = document.createElement('source');
     videoSrc.src = videoUrl;
     videoSrc.type = 'video/mp4';
-
-    console.log(videoSrc)
-
     const textinfo = document.createElement('div');
     textinfo.className = "text-info"
 
@@ -103,13 +96,11 @@ function display(videoBlob) {
 const getVideo = async function(url) {
 
     const response = await fetch(url);
-    console.log(response);
     if (!response.ok) {
         throw new Error(`Fehler in der Adresse ${url}, Fehlercode: ${response.status}!`);
     }
     // Bekommen Daten in einer Binärform 
     let content = await response.blob()
-    console.log(content);
     addVideo(content)
     display(content)
 };
@@ -119,7 +110,6 @@ const getVideo = async function(url) {
 
 let request = window.indexedDB.open('videos_db', 1);
 
-console.log(request);
 
 // In onsuccess-Eventhandler weisen wir der Variablen db das Ergebnis einer Abfrage zur Erstellung einer Datenbank zu 
 // und das Ergebnis der Abfrage ist die Datenbank selbst.
@@ -127,7 +117,6 @@ console.log(request);
 request.onsuccess = (e) => {
 
     db = e.target.result;
-    console.log(db);
 
     // Schleife, bei der man alle Videos die im arrayOfData aufgezählt sind aus der Datenbank holt, 
     // wenn aber die Videos nicht in der Datenbank vorhanden sind, versuchen wir die aus dem Netz zu holen.
@@ -142,12 +131,10 @@ request.onsuccess = (e) => {
         request.onsuccess = () => {
             // Wenn die Videos nicht in dem Cache sind, dann hollen wir die aus dem Netz
             if (request.result == undefined) {
-                console.log(arrayOfData[i]);
                 getVideo(`/videos/${arrayOfData[i]}.mp4`);
             }
             // Wenn man aber in der Datenbank etwas hat, dann wird es zu der Funktion display übergeben und somit angezeigt.  
             if (request.result !== undefined) {
-                console.log(request.result)
                 display(request.result.videoBlob);
             }
         };
